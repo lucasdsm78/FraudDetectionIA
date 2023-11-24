@@ -21,6 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r fastapi/requirements.txt
+          pip install dvc
 
   deploy:
     runs-on: ubuntu-latest
@@ -36,9 +37,17 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Set up MLflow
+
+      - name: Initialize DVC and Set Up DagsHub Remote
         run: |
-          pip install mlflow
+          dvc init
+          dvc remote add origin dvc+https://dagshub.com/lucasdsm78/fraud-detection-ia-repo.dvc
+
+      - name: Add Model and Data to DVC
+        run: |
+          dvc add models/random_forest_model.pkl
+#          dvc add data/datafile.csv
+          dvc push -r origin
 
 #      - name: Deploy Model
 #        run: |

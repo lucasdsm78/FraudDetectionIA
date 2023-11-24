@@ -24,9 +24,12 @@ jobs:
           pip install dvc
 
       - name: Run Jupyter Notebook
-        uses: callysto/jupyter-action@v1
-        with:
-          file: "fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb"
+        run: |
+          docker run --rm -it \
+            -v $(pwd):/home/jovyan/work \
+            -w /home/jovyan/work \
+            jupyter/notebook \
+            jupyter nbconvert --execute fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb
 
       - name: Initialize DVC and Set Up DagsHub Remote
         run: |

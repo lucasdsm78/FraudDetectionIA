@@ -23,13 +23,6 @@ jobs:
           pip install -r fastapi/requirements.txt
           pip install dvc
 
-      - name: Install Dependencies and DVC
-        uses: yaananth/run-notebook@v2
-        with:
-          notebook: "fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb"
-          isReport: False
-          poll: True
-
       - name: Initialize DVC and Set Up DagsHub Remote
         run: |
           dvc init

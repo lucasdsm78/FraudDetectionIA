@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Jupyter Notebook
         run: |
-          jupyter nbconvert --execute path/to/your/notebook.ipynb
+          jupyter nbconvert --execute fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb
 
       - name: Move model file to fastapi directory
         run: |

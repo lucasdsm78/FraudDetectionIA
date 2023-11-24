@@ -30,7 +30,7 @@ jobs:
 
       - name: Add Model and Data to DVC
         run: |
-          dvc add models/random_forest_model.pkl
+          dvc add fastapi/random_forest_model.pkl
           dvc push -r origin
 
   deploy:

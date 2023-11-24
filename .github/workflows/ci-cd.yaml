@@ -22,9 +22,19 @@ jobs:
         run: |
           pip install -r fastapi/requirements.txt
           pip install dvc
+          pip install jupyter
+
+      - name: Run Jupyter Notebook
+        run: |
+          jupyter nbconvert --execute path/to/your/notebook.ipynb
+
+      - name: Move model file to fastapi directory
+        run: |
+          cp random_forest_model.pkl fastapi/
 
       - name: Initialize DVC and Set Up DagsHub Remote
         run: |
+          cd fastapi
           dvc init
           dvc remote add origin dvc+https://dagshub.com/lucasdsm78/fraud-detection-ia-repo.dvc
 

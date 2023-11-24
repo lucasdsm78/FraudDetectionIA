@@ -23,6 +23,7 @@ jobs:
           pip install -r fastapi/requirements.txt
           pip install dvc
           pip install jupyter
+          
 
       - name: Run Jupyter Notebook
         run: |

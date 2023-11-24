@@ -13,12 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python and DVC
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
-      - name: Install Dependencies
+      - name: Install Dependencies and DVC
         run: |
           pip install -r fastapi/requirements.txt
           pip install dvc
@@ -30,7 +30,8 @@ jobs:
 
       - name: Add Model and Data to DVC
         run: |
-          dvc add fastapi/random_forest_model.pkl
+          cd fastapi
+          dvc add random_forest_model.pkl
           dvc push -r origin
 
   deploy:

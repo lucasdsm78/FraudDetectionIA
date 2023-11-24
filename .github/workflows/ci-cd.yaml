@@ -52,11 +52,13 @@ jobs:
 #          mlflow registry add-model -m models:/v1 -n random_forest_model --artifact-path random_forest_model.pkl
 
       - name: Deploy FastAPI App
-        run: |
+        run: | 
+          cd fastapi
           docker build -t fastapi_ia .
           docker tag fastapi_ia:latest fastapi_ia:v1
 
       - name: Push Docker Image
         run: |
+          cd fastapi
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push fastapi_ia:v1

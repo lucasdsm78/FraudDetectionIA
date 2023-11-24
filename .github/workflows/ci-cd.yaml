@@ -46,22 +46,10 @@ jobs:
       - name: Add Model and Data to DVC
         run: |
           dvc add models/random_forest_model.pkl
-#          dvc add data/datafile.csv
           dvc push -r origin
 
-#      - name: Deploy Model
-#        run: |
-#          mlflow login -u ${{ secrets.MLFLOW_USERNAME }} -p ${{ secrets.MLFLOW_PASSWORD }} -e ${{ secrets.MLFLOW_ENDPOINT }}
-#          mlflow models serve -m models:/v1 -h 0.0.0.0 -p 8000
-
-#      - name: Deploy Pickle File to MLflow Registry
-#        run: |
-#          mlflow login -u ${{ secrets.MLFLOW_USERNAME }} -p ${{ secrets.MLFLOW_PASSWORD }} -e ${{ secrets.MLFLOW_ENDPOINT }}
-#          mlflow registry --url ${{ secrets.MLFLOW_REGISTRY_URL }}
-#          mlflow registry add-model -m models:/v1 -n random_forest_model --artifact-path random_forest_model.pkl
-
       - name: Deploy FastAPI App
-        run: | 
+        run: |
           cd fastapi
           docker build -t lucasdsm78/fastapi_ia:v1 .
           docker tag lucasdsm78/fastapi_ia:v1 lucasdsm78/fastapi_ia:latest

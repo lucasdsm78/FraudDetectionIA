@@ -30,7 +30,8 @@ jobs:
 
       - name: Add Model and Data to DVC
         run: |
-          cd ../fastapi
+          cd fastapi
+          ls
           dvc add random_forest_model.pkl
           dvc push -r origin
 

@@ -23,6 +23,16 @@ jobs:
           pip install -r fastapi/requirements.txt
           pip install dvc
 
+      - name: Initialize DVC and Set Up DagsHub Remote
+        run: |
+          dvc init
+          dvc remote add origin dvc+https://dagshub.com/lucasdsm78/fraud-detection-ia-repo.dvc
+
+      - name: Add Model and Data to DVC
+        run: |
+          dvc add models/random_forest_model.pkl
+          dvc push -r origin
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -36,17 +46,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-
-
-      - name: Initialize DVC and Set Up DagsHub Remote
-        run: |
-          dvc init
-          dvc remote add origin dvc+https://dagshub.com/lucasdsm78/fraud-detection-ia-repo.dvc
-
-      - name: Add Model and Data to DVC
-        run: |
-          dvc add models/random_forest_model.pkl
-          dvc push -r origin
 
       - name: Deploy FastAPI App
         run: |

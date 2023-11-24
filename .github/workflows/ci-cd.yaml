@@ -54,8 +54,8 @@ jobs:
       - name: Deploy FastAPI App
         run: | 
           cd fastapi
-          docker build -t fastapi_ia_image .
-          docker tag fastapi_ia_image:v1 lucasdsm78/fastapi_ia:v1
+          docker build -t lucasdsm78/fastapi_ia:v1 .
+          docker tag lucasdsm78/fastapi_ia:v1 lucasdsm78/fastapi_ia:latest
 
       - name: Push Docker Image
         run: |

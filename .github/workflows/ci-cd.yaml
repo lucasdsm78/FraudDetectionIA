@@ -55,7 +55,7 @@ jobs:
         run: | 
           cd fastapi
           docker build -t fastapi_ia .
-          docker tag v1 lucasdsm78/fastapi_ia:v1
+          docker tag local-image:v1 lucasdsm78/fastapi_ia:v1
 
       - name: Push Docker Image
         run: |

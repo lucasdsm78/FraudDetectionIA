@@ -23,13 +23,12 @@ jobs:
           pip install -r fastapi/requirements.txt
           pip install dvc
 
-      - name: Run Jupyter Notebook
-        run: |
-          docker run --rm -it \
-            -v $(pwd):/home/jovyan/work \
-            -w /home/jovyan/work \
-            jupyter/notebook \
-            jupyter nbconvert --execute fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb
+      - name: Install Dependencies and DVC
+        uses: yaananth/run-notebook@v2
+        with:
+          notebook: "fastapi/fraud-detection-with-0-96-recall-and-0-98-auc.ipynb"
+          isReport: False
+          poll: True
 
       - name: Initialize DVC and Set Up DagsHub Remote
         run: |
